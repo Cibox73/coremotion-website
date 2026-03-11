@@ -6,6 +6,10 @@
     <title>Dienstleistungen - CoreMotion KI Agentur</title>
     <meta name="description" content="Unsere Dienstleistungen: KI Automation, Webdesign, SEO & App Entwicklung. Innovative Lösungen für Ihr Unternehmen.">
     
+    <!-- Favicon to prevent 404 errors -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -95,7 +99,7 @@
     </nav>
 
     <!-- Hero Section with Vortex -->
-    <section class="min-h-[70vh] vortex-container bg-black pt-20 flex items-center">
+    <section class="min-h-[75vh] vortex-container bg-black pt-20 flex items-center">
         <canvas id="vortexCanvas" class="vortex-canvas"></canvas>
         <div class="vortex-content max-w-7xl mx-auto px-6 py-20 w-full">
             <div class="flex justify-center">
@@ -111,7 +115,7 @@
         </div>
     </section>
 
-    <!-- Vortex JavaScript -->
+    <!-- Simple Vortex Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const canvas = document.getElementById('vortexCanvas');
