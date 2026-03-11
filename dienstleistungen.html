@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dienstleistungen - CoreMotion KI Agentur</title>
+    <meta name="description" content="Unsere Dienstleistungen: KI Automation, Webdesign, SEO & App Entwicklung. Innovative Lösungen für Ihr Unternehmen.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        .vortex-container { position: relative; overflow: hidden; }
+        .vortex-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .vortex-content { position: relative; z-index: 10; }
+        .text-gradient { background: linear-gradient(90deg, #F97316 0%, #FB923C 50%, #2563EB 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .service-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+        .service-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .feature-card {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        .btn-primary {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(249, 115, 22, 0.3);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        .btn-secondary {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .service-card:hover {
+                transform: none;
+            }
+            .feature-card:hover {
+                transform: none;
+            }
+        }
+        .focus-visible:focus-visible {
+            outline: 2px solid #2563EB;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="antialiased bg-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm py-4 px-6 shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold focus-visible">
+                <span class="text-[#1E1B4B]">Core</span><span class="text-[#F97316]">Motion</span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="font-medium hover:text-[#F97316] focus-visible">Start</a>
+                <a href="dienstleistungen.html" class="font-medium text-[#F97316] focus-visible">Dienstleistungen</a>
+                <a href="index.html#portfolio" class="font-medium hover:text-[#F97316] focus-visible">Portfolio</a>
+                <a href="index.html#contact" class="font-medium hover:text-[#F97316] focus-visible">Kontakt</a>
+            </div>
+            <button class="md:hidden focus-visible" aria-label="Menü öffnen">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Vortex -->
+    <section class="min-h-[70vh] vortex-container bg-black pt-20 flex items-center">
+        <canvas id="vortexCanvas" class="vortex-canvas"></canvas>
+        <div class="vortex-content max-w-7xl mx-auto px-6 py-20 w-full">
+            <div class="flex justify-center">
+                <div class="backdrop-blur-sm bg-black/40 rounded-3xl p-10 border border-white/10 max-w-3xl">
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-8 text-center">
+                        Unsere Dienstleistungen
+                    </h1>
+                    <p class="text-2xl text-gray-300 leading-relaxed text-center">
+                        Wir bieten umfassende digitale Lösungen, die Ihr Unternehmen voranbringen. Von KI-Automation bis zur App-Entwicklung
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vortex JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('vortexCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const particles = [];
+            const particleCount = 300;
+            
+            function resize() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+            
+            function createParticles() {
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        size: Math.random() * 2 + 1,
+                        speedX: Math.random() * 2 - 1,
+                        speedY: Math.random() * 2 - 1,
+                        hue: 220 + Math.random() * 100
+                    });
+                }
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Dark background
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Update and draw particles
+                for (const p of particles) {
+                    // Vortex effect
+                    const centerX = canvas.width / 2;
+                    const centerY = canvas.height / 2;
+                    const dx = p.x - centerX;
+                    const dy = p.y - centerY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const angle = Math.atan2(dy, dx);
+                    
+                    p.x = centerX + Math.cos(angle + 0.002) * distance * 0.999;
+                    p.y = centerY + Math.sin(angle + 0.002) * distance * 0.999;
+                    
+                    p.x += p.speedX * 0.3;
+                    p.y += p.speedY * 0.3;
+                    
+                    // Draw particle
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `hsla(${p.hue}, 100%, 60%, 0.8)`;
+                    ctx.fill();
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            resize();
+            createParticles();
+            animate();
+            window.addEventListener('resize', resize);
+        });
+    </script>
+
+    <!-- Main Services Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- KI Automation -->
+            <div class="mb-20">
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-12">
+                    <div class="service-card">
+                        <div class="service-icon bg-gradient-to-br from-[#F97316] to-[#FB923C] text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                            </svg>
+                        </div>
+                        <h2 class="text-4xl font-bold text-[#1E1B4B] mb-4">KI Automation</h2>
+                        <p class="text-xl text-gray-600 mb-6">
+                            Intelligente Automatisierungslösungen für effiziente Prozesse und optimierte Abläufe.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-orange-50 rounded-xl p-4 feature-card">
+                                <h4 class="font-bold text-[#F97316] mb-2">Prozessautomatisierung</h4>
+                                <p class="text-sm text-gray-600">Wiederkehrende Aufgaben automatisch erledigen</p>
+                            </div>
+                            <div class="bg-orange-50 rounded-xl p-4 feature-card">
+                                <h4 class="font-bold text-[#F97316] mb-2">KI-gestützte Analyse</h4>
+                                <p class="text-sm text-gray-600">Daten intelligent auswerten und Insights generieren</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-3xl p-8">
+                        <h3 class="text-2xl font-bold text-[#1E1B4B] mb-4">Unsere Lösungen</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-[#F97316] rounded-full mr-3"></div>
+                                <span>Chatbot-Integration für Kundenservice</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-[#F97316] rounded-full mr-3"></div>
+                                <span>Datenanalyse und Predictive Analytics</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-[#F97316] rounded-full mr-3"></div>
+                                <span>Workflow-Automatisierung</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-[#F97316] rounded-full mr-3"></div>
+                                <span>KI-gestützte Dokumentenverarbeitung</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Webdesign -->
+            <div class="mb-20">
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-12">
+                    <div class="order-2 md:order-1 service-card">
+                        <div class="service-icon bg-gradient-to-br from-[#2563EB] to-blue-400 text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                            </svg>
+                        </div>
+                        <h2 class="text-4xl font-bold text-[#1E1B4B] mb-4">Webdesign & Entwicklung</h2>
+                        <p class="text-xl text-gray-600 mb-6">
+                            Professionelle Websites mit modernem Design und optimierter Benutzererfahrung.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-blue-50 rounded-xl p-4 feature-card">
+                                <h4 class="font-bold text-[#2563EB] mb-2">Responsive Design</h4>
+                                <p class="text-sm text-gray-600">Perfekt auf allen Geräten</p>
+                            </div>
+                            <div class="bg-blue-50 rounded-xl p-4 feature-card">
+                                <h4 class="font-bold text-[#2563EB] mb-2">UI/UX Optimierung</h4>
+                                <p class="text-sm text-gray-600">Intuitive Benutzerführung</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2 bg-gradient-to-br from-blue-50 to-sky-50 rounded-3xl p-8">
+                        <h3 class="text-2xl font-bold text-[#1E1B4B] mb-4">Unsere Expertise</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-[#2563EB] rounded-full mr-3"></div>
+                                <span>Moderne Web-Apps mit React & Vue.js</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-[#2563EB] rounded-full mr-3"></div>
+                                <span>E-Commerce Lösungen (Shopify, WooCommerce)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-[#2563EB] rounded-full mr-3"></div>
+                                <span>Corporate Websites & Landing Pages</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-[#2563EB] rounded-full mr-3"></div>
+                                <span>Performance-Optimierung & SEO-Grundlagen</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO -->
+            <div class="mb-20">
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-12">
+                    <div class="service-card">
+                        <div class="service-icon bg-gradient-to-br from-green-500 to-emerald-400 text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6.7c0-.56.447-1 1-1h4c.553 0 1 .44 1 1v6.7M9 19H5m4 0h4m4 0h4m-4 0v-6.7c0-.56.447-1 1-1h4c.553 0 1 .44 1 1v6.7m-6 0h4" />
+                            </svg>
+                        </div>
+                        <h2 class="text-4xl font-bold text-[#1E1B4B] mb-4">SEO & Marketing</h2>
+                        <p class="text-xl text-gray-600 mb-6">
+                            Mehr Sichtbarkeit in Suchmaschinen und gezieltes Online-Marketing für nachhaltigen Erfolg.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-green-50 rounded-xl p-4 feature-card">
+                                <h4 class="font-bold text-green-600 mb-2">Suchmaschinenoptimierung</h4>
+                                <p class="text-sm text-gray-600">Bessere Rankings in Google</p>
+                            </div>
+                            <div class="bg-green-50 rounded-xl p-4 feature-card">
+                                <h4 class="font-bold text-green-600 mb-2">Content Marketing</h4>
+                                <p class="text-sm text-gray-600">Wertvolle Inhalte für Ihre Zielgruppe</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-8">
+                        <h3 class="text-2xl font-bold text-[#1E1B4B] mb-4">Unsere Strategien</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                <span>Technische SEO-Analyse & Optimierung</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                <span>Keyword-Recherche & Content-Strategie</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                <span>Local SEO für regionale Präsenz</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                <span>Performance-Tracking & Reporting</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- App Entwicklung -->
+            <div class="mb-20">
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-12">
+                    <div class="order-2 md:order-1 service-card">
+                        <div class="service-icon bg-gradient-to-br from-purple-500 to-pink-400 text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h2 class="text-4xl font-bold text-[#1E1B4B] mb-4">App Entwicklung</h2>
+                        <p class="text-xl text-gray-600 mb-6">
+                            Mobile und Web-Apps für alle Plattformen - maßgeschneidert für Ihre Anforderungen.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-purple-50 rounded-xl p-4 feature-card">
+                                <h4 class="font-bold text-purple-600 mb-2">Native Apps</h4>
+                                <p class="text-sm text-gray-600">iOS & Android Entwicklung</p>
+                            </div>
+                            <div class="bg-purple-50 rounded-xl p-4 feature-card">
+                                <h4 class="font-bold text-purple-600 mb-2">Cross-Platform</h4>
+                                <p class="text-sm text-gray-600">React Native & Flutter</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2 bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8">
+                        <h3 class="text-2xl font-bold text-[#1E1B4B] mb-4">Unsere Technologien</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                <span>Native iOS-Entwicklung (Swift)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                <span>Native Android-Entwicklung (Kotlin)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                <span>Cross-Platform mit React Native</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                <span>Progressive Web Apps (PWA)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-[#1E1B4B] to-[#3730A3] text-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Starten Sie Ihr Projekt mit uns</h2>
+            <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                Lassen Sie uns gemeinsam Ihre digitale Transformation gestalten. 
+                Wir beraten Sie gerne unverbindlich zu Ihren Möglichkeiten.
+            </p>
+            <a href="index.html#contact" class="inline-block bg-[#F97316] text-white px-8 py-4 rounded-full font-medium hover:bg-[#FB923C] transition-colors duration-200 shadow-[0px_2px_0px_0px_#FFFFFF40_inset]">
+                Kostenlose Beratung anfordern
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#1E1B4B] text-white py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4"><span class="text-white">Core</span><span class="text-[#F97316]">Motion</span></h3>
+                    <p class="text-gray-300 mb-4">Ihre KI-Agentur für innovative digitale Lösungen.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white">Start</a></li>
+                        <li><a href="dienstleistungen.html" class="text-gray-300 hover:text-white">Dienstleistungen</a></li>
+                        <li><a href="index.html#portfolio" class="text-gray-300 hover:text-white">Portfolio</a></li>
+                        <li><a href="index.html#contact" class="text-gray-300 hover:text-white">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Kontakt</h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">info@coremotion.de</li>
+                        <li class="text-gray-300">+49 123 456789</li>
+                        <li class="text-gray-300">Musterstraße 123, 10115 Berlin</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2023 CoreMotion. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
