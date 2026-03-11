@@ -39,6 +39,22 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        .vortex-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .vortex-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .vortex-content {
+            position: relative;
+            z-index: 10;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -58,57 +74,211 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen gradient-bg pt-20 flex items-center">
-        <div class="max-w-7xl mx-auto px-6 py-20">
+    <!-- Hero Section with Vortex Effect -->
+    <section id="home" class="min-h-screen vortex-container bg-black pt-20 flex items-center">
+        <!-- Vortex Canvas -->
+        <canvas id="vortexCanvas" class="vortex-canvas"></canvas>
+        
+        <!-- Content -->
+        <div class="vortex-content max-w-7xl mx-auto px-6 py-20 w-full">
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <div class="inline-flex items-center bg-white/80 rounded-full px-4 py-2 mb-6">
+                <div class="backdrop-blur-sm bg-black/40 rounded-3xl p-8 border border-white/10">
+                    <div class="inline-flex items-center bg-white/20 rounded-full px-4 py-2 mb-6">
                         <div class="w-2 h-2 bg-[#F97316] rounded-full mr-2"></div>
-                        <span class="text-sm font-medium">Innovative KI-Lösungen seit 2023</span>
+                        <span class="text-sm font-medium text-white">Innovative KI-Lösungen seit 2023</span>
                     </div>
-                    <h1 class="text-5xl md:text-7xl font-bold text-[#1E1B4B] mb-6">
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
                         Die Zukunft gestalten mit <span class="text-gradient">KI-Power</span>
                     </h1>
-                    <p class="text-xl text-gray-700 mb-8">
+                    <p class="text-xl text-gray-300 mb-8">
                         CoreMotion ist Ihre KI-Agentur für innovative Lösungen in Automation, Webdesign, SEO und App Entwicklung. Wir transformieren Ihre Ideen in digitale Erfolge.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#contact" class="bg-[#F97316] text-white px-8 py-4 rounded-full font-medium hover:bg-[#FB923C] transition-colors duration-200 text-center">
+                        <a href="#contact" class="bg-[#F97316] text-white px-8 py-4 rounded-full font-medium hover:bg-[#FB923C] transition-colors duration-200 text-center shadow-[0px_2px_0px_0px_#FFFFFF40_inset]">
                             Kostenlose Beratung
                         </a>
-                        <a href="#portfolio" class="border-2 border-[#F97316] text-[#F97316] px-8 py-4 rounded-full font-medium hover:bg-[#F97316]/10 transition-colors duration-200 text-center">
+                        <a href="#portfolio" class="border-2 border-white text-white px-8 py-4 rounded-full font-medium hover:bg-white/10 transition-colors duration-200 text-center">
                             Unsere Projekte
                         </a>
                     </div>
                 </div>
-                <div class="relative">
-                    <div class="bg-gradient-to-br from-[#F97316]/20 to-[#2563EB]/20 rounded-3xl p-8">
-                        <div class="bg-white/90 rounded-2xl p-6 shadow-2xl">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-gradient-to-br from-[#F97316] to-[#FB923C] rounded-xl p-4 h-32 flex items-center justify-center">
-                                    <span class="text-white text-2xl font-bold">KI</span>
-                                </div>
-                                <div class="bg-gradient-to-br from-[#2563EB] to-blue-400 rounded-xl p-4 h-32 flex items-center justify-center">
-                                    <span class="text-white text-2xl font-bold">Web</span>
-                                </div>
-                                <div class="bg-gradient-to-br from-green-500 to-emerald-400 rounded-xl p-4 h-32 flex items-center justify-center">
-                                    <span class="text-white text-2xl font-bold">SEO</span>
-                                </div>
-                                <div class="bg-gradient-to-br from-purple-500 to-pink-400 rounded-xl p-4 h-32 flex items-center justify-center">
-                                    <span class="text-white text-2xl font-bold">Apps</span>
-                                </div>
-                            </div>
-                            <div class="mt-6 text-center">
-                                <h3 class="text-xl font-bold text-[#1E1B4B]">Vier Säulen der Digitalisierung</h3>
-                                <p class="text-gray-600 mt-2">KI Automation • Webdesign • SEO • App Entwicklung</p>
-                            </div>
-                        </div>
+                
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-gradient-to-br from-[#F97316]/80 to-[#FB923C]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                        <div class="text-white text-4xl font-bold mb-2">500+</div>
+                        <div class="text-white/80 text-sm">KI-Projekte umgesetzt</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-[#2563EB]/80 to-blue-400/80 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                        <div class="text-white text-4xl font-bold mb-2">99%</div>
+                        <div class="text-white/80 text-sm">Kundenzufriedenheit</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-500/80 to-emerald-400/80 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                        <div class="text-white text-4xl font-bold mb-2">24/7</div>
+                        <div class="text-white/80 text-sm">Support & Monitoring</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-500/80 to-pink-400/80 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                        <div class="text-white text-4xl font-bold mb-2">50+</div>
+                        <div class="text-white/80 text-sm">Expert:innen im Team</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Vortex JavaScript -->
+    <script>
+        class VortexEffect {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.particles = [];
+                this.particleCount = 400;
+                this.baseHue = 220;
+                this.animationId = null;
+                
+                this.init();
+                this.animate();
+                window.addEventListener('resize', () => this.resize());
+            }
+            
+            init() {
+                this.resize();
+                this.createParticles();
+            }
+            
+            resize() {
+                this.canvas.width = this.canvas.offsetWidth;
+                this.canvas.height = this.canvas.offsetHeight;
+            }
+            
+            createParticles() {
+                this.particles = [];
+                for (let i = 0; i < this.particleCount; i++) {
+                    this.particles.push({
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        size: Math.random() * 2 + 1,
+                        speedX: Math.random() * 2 - 1,
+                        speedY: Math.random() * 2 - 1,
+                        hue: this.baseHue + Math.random() * 100,
+                        life: Math.random() * 100,
+                        maxLife: 100 + Math.random() * 100
+                    });
+                }
+            }
+            
+            animate() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Dark background with gradient
+                const gradient = this.ctx.createRadialGradient(
+                    this.canvas.width / 2,
+                    this.canvas.height / 2,
+                    0,
+                    this.canvas.width / 2,
+                    this.canvas.height / 2,
+                    Math.max(this.canvas.width, this.canvas.height) / 2
+                );
+                gradient.addColorStop(0, 'rgba(0, 0, 0, 0.7)');
+                gradient.addColorStop(1, 'rgba(0, 0, 0, 0.9)');
+                this.ctx.fillStyle = gradient;
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Update and draw particles
+                for (const particle of this.particles) {
+                    // Vortex rotation effect
+                    const centerX = this.canvas.width / 2;
+                    const centerY = this.canvas.height / 2;
+                    const dx = particle.x - centerX;
+                    const dy = particle.y - centerY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const angle = Math.atan2(dy, dx);
+                    
+                    // Create vortex rotation
+                    const rotationSpeed = 0.002;
+                    const newAngle = angle + rotationSpeed;
+                    
+                    particle.x = centerX + Math.cos(newAngle) * distance * 0.999;
+                    particle.y = centerY + Math.sin(newAngle) * distance * 0.999;
+                    
+                    // Add random movement
+                    particle.x += particle.speedX * 0.3;
+                    particle.y += particle.speedY * 0.3;
+                    
+                    // Bounce off edges
+                    if (particle.x < 0 || particle.x > this.canvas.width) particle.speedX *= -1;
+                    if (particle.y < 0 || particle.y > this.canvas.height) particle.speedY *= -1;
+                    
+                    // Update life cycle
+                    particle.life += 0.5;
+                    if (particle.life > particle.maxLife) {
+                        particle.life = 0;
+                        particle.x = Math.random() * this.canvas.width;
+                        particle.y = Math.random() * this.canvas.height;
+                    }
+                    
+                    // Draw particle with glow
+                    const alpha = Math.sin((particle.life / particle.maxLife) * Math.PI) * 0.8;
+                    
+                    // Glow effect
+                    this.ctx.beginPath();
+                    this.ctx.arc(particle.x, particle.y, particle.size * 3, 0, Math.PI * 2);
+                    const glowGradient = this.ctx.createRadialGradient(
+                        particle.x, particle.y, 0,
+                        particle.x, particle.y, particle.size * 3
+                    );
+                    glowGradient.addColorStop(0, `hsla(${particle.hue}, 100%, 60%, ${alpha * 0.3})`);
+                    glowGradient.addColorStop(1, `hsla(${particle.hue}, 100%, 60%, 0)`);
+                    this.ctx.fillStyle = glowGradient;
+                    this.ctx.fill();
+                    
+                    // Particle core
+                    this.ctx.beginPath();
+                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    this.ctx.fillStyle = `hsla(${particle.hue}, 100%, 60%, ${alpha})`;
+                    this.ctx.fill();
+                }
+                
+                // Draw connecting lines between nearby particles
+                for (let i = 0; i < this.particles.length; i++) {
+                    for (let j = i + 1; j < this.particles.length; j++) {
+                        const p1 = this.particles[i];
+                        const p2 = this.particles[j];
+                        const dx = p1.x - p2.x;
+                        const dy = p1.y - p2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 80) {
+                            const alpha = (1 - distance / 80) * 0.15;
+                            this.ctx.beginPath();
+                            this.ctx.moveTo(p1.x, p1.y);
+                            this.ctx.lineTo(p2.x, p2.y);
+                            this.ctx.strokeStyle = `hsla(${(p1.hue + p2.hue) / 2}, 100%, 60%, ${alpha})`;
+                            this.ctx.lineWidth = 0.5;
+                            this.ctx.stroke();
+                        }
+                    }
+                }
+                
+                this.animationId = requestAnimationFrame(() => this.animate());
+            }
+            
+            destroy() {
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                }
+            }
+        }
+        
+        // Initialize vortex when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('vortexCanvas');
+            if (canvas) {
+                window.vortex = new VortexEffect(canvas);
+            }
+        });
+    </script>
 
     <!-- Services Section -->
     <section id="services" class="py-20 bg-white">
@@ -175,261 +345,3 @@
                 <div class="glass-card rounded-2xl p-8 hover:shadow-xl transition-shadow duration-300">
                     <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-400 rounded-xl flex items-center justify-center mb-6">
                         <span class="text-white text-2xl">📈</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-[#1E1B4B] mb-4">SEO</h3>
-                    <p class="text-gray-600 mb-6">
-                        Suchmaschinenoptimierung für mehr Sichtbarkeit.
-                    </p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                            <span>Keyword-Recherche</span>
-                        </li>
-                        <li class="flex items-center">
-                            <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                            <span>On-Page Optimierung</span>
-                        </li>
-                        <li class="flex items-center">
-                            <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                            <span>Content-Strategie</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- App Entwicklung -->
-                <div class="glass-card rounded-2xl p-8 hover:shadow-xl transition-shadow duration-300">
-                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-400 rounded-xl flex items-center justify-center mb-6">
-                        <span class="text-white text-2xl">📱</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-[#1E1B4B] mb-4">App Entwicklung</h3>
-                    <p class="text-gray-600 mb-6">
-                        Mobile und Web-Apps für alle Plattformen.
-                    </p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                            <span>iOS & Android Apps</span>
-                        </li>
-                        <li class="flex items-center">
-                            <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                            <span>Progressive Web Apps</span>
-                        </li>
-                        <li class="flex items-center">
-                            <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                            <span>Cross-Platform Entwicklung</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 gradient-bg">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center text-[#1E1B4B] mb-4">
-                Unser <span class="text-[#F97316]">Portfolio</span>
-            </h2>
-            <p class="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
-                Erfolgreiche Projekte, die wir für unsere Kunden umgesetzt haben
-            </p>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Projekt 1 -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <div class="h-48 bg-gradient-to-br from-[#F97316] to-[#FB923C]"></div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-[#1E1B4B] mb-2">KI Chatbot für E-Commerce</h3>
-                        <p class="text-gray-600 mb-4">
-                            Intelligenter Chatbot für einen Online-Shop mit 40% Reduktion der Support-Anfragen.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-[#F97316]/10 text-[#F97316] px-3 py-1 rounded-full text-sm">KI</span>
-                            <span class="bg-[#2563EB]/10 text-[#2563EB] px-3 py-1 rounded-full text-sm">Automation</span>
-                            <span class="bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-sm">E-Commerce</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Projekt 2 -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <div class="h-48 bg-gradient-to-br from-[#2563EB] to-blue-400"></div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-[#1E1B4B] mb-2">Corporate Website Redesign</h3>
-                        <p class="text-gray-600 mb-4">
-                            Modernes Redesign einer Unternehmenswebsite mit 300% mehr Conversions.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-[#2563EB]/10 text-[#2563EB] px-3 py-1 rounded-full text-sm">Webdesign</span>
-                            <span class="bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-sm">SEO</span>
-                            <span class="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-full text-sm">UI/UX</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Projekt 3 -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-400"></div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-[#1E1B4B] mb-2">Fitness Tracking App</h3>
-                        <p class="text-gray-600 mb-4">
-                            Mobile App für Fitness-Tracking mit KI-gestützten Trainingsempfehlungen.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-full text-sm">App</span>
-                            <span class="bg-[#F97316]/10 text-[#F97316] px-3 py-1 rounded-full text-sm">KI</span>
-                            <span class="bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-sm">Mobile</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center text-[#1E1B4B] mb-4">
-                Kontaktieren Sie <span class="text-[#F97316]">uns</span>
-            </h2>
-            <p class="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
-                Lassen Sie uns über Ihr Projekt sprechen
-            </p>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <!-- Contact Info -->
-                <div>
-                    <h3 class="text-2xl font-bold text-[#1E1B4B] mb-6">Kontaktinformationen</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-[#F97316]/10 rounded-full flex items-center justify-center mr-4">
-                                <span class="text-[#F97316] text-xl">📍</span>
-                            </div>
-                            <div>
-                                <h4 class="font-bold">Adresse</h4>
-                                <p class="text-gray-600">Musterstraße 123<br>10115 Berlin</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-[#2563EB]/10 rounded-full flex items-center justify-center mr-4">
-                                <span class="text-[#2563EB] text-xl">📧</span>
-                            </div>
-                            <div>
-                                <h4 class="font-bold">Email</h4>
-                                <p class="text-gray-600">info@coremotion.de</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center mr-4">
-                                <span class="text-green-500 text-xl">📞</span>
-                            </div>
-                            <div>
-                                <h4 class="font-bold">Telefon</h4>
-                                <p class="text-gray-600">+49 30 12345678</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-12">
-                        <h3 class="text-2xl font-bold text-[#1E1B4B] mb-6">Bereit für Ihr Projekt?</h3>
-                        <p class="text-gray-600 mb-6">
-                            Kontaktieren Sie uns für eine kostenlose Erstberatung. Wir analysieren Ihre Anforderungen und erstellen ein maßgeschneidertes Konzept.
-                        </p>
-                        <a href="mailto:info@coremotion.de" class="inline-block bg-[#F97316] text-white px-8 py-4 rounded-full font-medium hover:bg-[#FB923C] transition-colors duration-200">
-                            Jetzt Termin vereinbaren
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Contact Form -->
-                <div class="glass-card rounded-2xl p-8">
-                    <h3 class="text-2xl font-bold text-[#1E1B4B] mb-6">Kontaktformular</h3>
-                    <form class="space-y-6">
-                        <div>
-                            <label class="block text-gray-700 mb-2">Name</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#F97316]" placeholder="Ihr Name">
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 mb-2">Email</label>
-                            <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#F97316]" placeholder="ihre@email.de">
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 mb-2">Nachricht</label>
-                            <textarea class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#F97316] h-32" placeholder="Ihre Nachricht..."></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-[#2563EB] text-white px-8 py-4 rounded-full font-medium hover:bg-blue-600 transition-colors duration-200">
-                            Nachricht senden
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-[#1E1B4B] text-white py-12">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-2xl font-bold mb-4">
-                        <span class="text-white">Core</span><span class="text-[#F97316]">Motion</span>
-                    </h3>
-                    <p class="text-gray-300">
-                        Ihre KI-Agentur für innovative digitale Lösungen.
-                    </p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Dienstleistungen</h4>
-                    <ul class="space-y-2 text-gray-300">
-                        <li><a href="#services" class="hover:text-[#F97316]">KI Automation</a></li>
-                        <li><a href="#services" class="hover:text-[#F97316]">Webdesign</a></li>
-                        <li><a href="#services" class="hover:text-[#F97316]">SEO</a></li>
-                        <li><a href="#services" class="hover:text-[#F97316]">App Entwicklung</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-gray-300">
-                        <li><a href="#home" class="hover:text-[#F97316]">Start</a></li>
-                        <li><a href="#portfolio" class="hover:text-[#F97316]">Portfolio</a></li>
-                        <li><a href="#contact" class="hover:text-[#F97316]">Kontakt</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Kontakt</h4>
-                    <p class="text-gray-300">
-                        Musterstraße 123<br>
-                        10115 Berlin<br>
-                        info@coremotion.de<br>
-                        +49 30 12345678
-                    </p>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2023 CoreMotion. Alle Rechte vorbehalten.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JavaScript for Mobile Menu -->
-    <script>
-        document.querySelector('button.md\\:hidden').addEventListener('click', function() {
-            const nav = document.querySelector('nav .hidden.md\\:flex');
-            nav.classList.toggle('hidden');
-            nav.classList.toggle('flex');
-            nav.classList.toggle('flex-col');
-            nav.classList.toggle('absolute');
-            nav.classList.toggle('top-16');
-            nav.classList.toggle('left-0');
-            nav.classList.toggle('right-0');
-            nav.classList.toggle('bg-white');
-            nav.classList.toggle('p-6');
-            nav.classList.toggle('shadow-lg');
-        });
-    </script>
-</body>
-</html>
